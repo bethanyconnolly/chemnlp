@@ -25,3 +25,8 @@ cd /fsx/proj-chemnlp/$2
 ## install
 pip install chemnlp # our repo
 pip install -r chemnlp/gpt-neox/requirements/requirements.txt # base gpt-neox requirements
+pip install -r chemnlp/gpt-neox/requirements/requirements-wandb.txt # add wand monitoring reqs
+python chemnlp/gpt-neox/megatron/fused_kernels/setup.py install
+## downgrades / pins
+pip install protobuf=="3.20"
+pip install numpy=="1.23"
