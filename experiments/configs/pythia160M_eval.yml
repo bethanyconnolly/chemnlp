@@ -104,7 +104,7 @@
   "deepspeed_mpi": True,
   "load": "/fsx/proj-chemnlp/experiments/checkpoints/finetuned/pythia-160M/",
   #"load": "/fsx/proj-chemnlp/beth/pythia160_checkpoints/",
-  "finetune": True,
+  #"finetune": True,
   "num_gpus": 1,
 }
 # {
