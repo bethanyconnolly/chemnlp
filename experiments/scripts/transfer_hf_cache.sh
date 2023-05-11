@@ -1,5 +1,5 @@
 #!/bin/bash
-hf_subdirs=( accelerate datasets hub )
+hf_subdirs=( accelerate datasets hub modules )
 for sub_dir in "${hf_subdirs[@]}"
 do
    cp -R ~/.cache/huggingface/$sub_dir/* /fsx/proj-chemnlp/hf_cache/$sub_dir
