@@ -5,21 +5,26 @@ from chemnlp.data_val.config import GridSearch
 from chemnlp.utils import _get_all_combinations
 
 # User-defined parameters
-MULTINODE_RUNS = False
+MULTINODE_RUNS = True
 SBATCH_SCRIPT = (
     "experiments/scripts/sbatch_train_hf_multinode.sh"
     if MULTINODE_RUNS
     else "experiments/scripts/sbatch_train_hf.sh"
 )
 
-WANDB_GRID_GROUPNAME = "test-grid-search-singlenode"
+WANDB_GRID_GROUPNAME = "1B_smiles_gridsearch"
 CONDA_ENV = "experiments/training-env"
-CHEMNLP_FOLDER = "jack"
+CHEMNLP_FOLDER = "beth"
 
-BASE_CONFIGS = ["1B_fine_tune.yml"]  # , "3B_fine_tune.yml"]
+BASE_CONFIGS = ["1B_fine_tune.yml"]
 GRID_PARAMETERS = GridSearch(
-    data={"path": ["/fsx/proj-chemnlp/data/EleutherAI/pythia-1b/marianna13/chemrxiv"]},
-    trainer={"learning_rate": [3e-4, 3e-3], "lr_scheduler_type": ["linear", "cosine"]},
+    data={"path": [
+        "s3://llched-tokenised/1B_pubmed_smiles_train",
+        "s3://llched-tokenised/1B_pubmed_smiles_valid_train",
+        "s3://llched-tokenised/1B_pubmed_smiles_valid_lift_train",
+        "s3://llched-tokenised/1B_pubmed_smiles_lift_train",
+        ]},
+    trainer={"learning_rate": [1e-4, 1e-5]},
 )
 
 if __name__ == "__main__":

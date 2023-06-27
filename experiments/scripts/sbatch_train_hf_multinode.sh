@@ -6,7 +6,7 @@
 #SBATCH --output=/fsx/proj-chemnlp/experiments/logs/training_%j.out
 #SBATCH --error=/fsx/proj-chemnlp/experiments/logs/training_%j.err
 #SBATCH --open-mode=append
-#SBATCH --account=topchem
+#SBATCH --account=chemnlp
 #SBATCH --partition=g40x
 #SBATCH --exclusive
 

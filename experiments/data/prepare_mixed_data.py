@@ -20,6 +20,7 @@ def run(config_path: str) -> None:
 
     dataset_slices = []
     for path, num_token in zip(config.data_paths, config.num_tokens):
+        print(path)
         dataset = datasets.load_from_disk(path)
         num_rows = int(num_token / config.context_length)
 
@@ -37,9 +38,11 @@ def run(config_path: str) -> None:
                 dataset.train_test_split(train_size=num_rows)["train"]
             )
 
+    print('mixing')
     mixed_data = datasets.concatenate_datasets(dataset_slices)
     mixed_data = mixed_data.shuffle(seed=RANDOM_SEED)
 
+    print('saving')
     mixed_data.save_to_disk(
         config.save_path,
         num_proc=os.cpu_count(),
@@ -51,14 +54,14 @@ def run(config_path: str) -> None:
         "component_num_tokens": config.num_tokens,
         "context_length": config.context_length,
         "dataset_size_samples": len(mixed_data),
-        "dataset_size_tokens_billions": (len(mixed_data) * config.context_length)
-        // 1e9,
+        "dataset_size_tokens_billions": round((len(mixed_data) * config.context_length)
+        / 1e9, 4),
     }
 
     print(summary_stats)
 
-    with open(f"{config.save_path}/summary_statistics.json", "w") as f:
-        f.write(json.dumps(summary_stats))
+    # with open(f"{config.save_path}/summary_statistics.json", "w") as f:
+    #     f.write(json.dumps(summary_stats))
 
 
 if __name__ == "__main__":

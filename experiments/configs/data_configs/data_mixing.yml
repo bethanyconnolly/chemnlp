@@ -1,4 +1,7 @@
-data_paths: ["/fsx/proj-chemnlp/data/EleutherAI/pythia-1b/hendrycks_STEM", "/fsx/proj-chemnlp/data/EleutherAI/pythia-1b/marianna13/chemrxiv"]
-num_tokens: [2826240, 28262400]
+data_paths: [
+  "s3://llched-tokenised/pile_pubmed_abs", 
+  "s3://llched-tokenised/smiles_valid_lift_train",
+]
+num_tokens: [951200000, 48800000]
 context_length: 2048
-save_path: "/fsx/proj-chemnlp/data/EleutherAI/pythia-1b/2826240hendrycks_28262400chemrxiv"
+save_path: "s3://llched-tokenised/1B_pubmed_smiles_valid_lift_train"

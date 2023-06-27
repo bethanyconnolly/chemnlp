@@ -19,18 +19,20 @@ trainer:
   num_train_epochs: 1
   learning_rate: 3e-4
   evaluation_strategy: steps
+  save_strategy: epoch
   logging_steps: 50
   eval_steps: 500
-  save_steps: 1000
   dataloader_num_workers: 4
   bf16: true
   fp16: false
-  per_device_train_batch_size: 2
-  per_device_eval_batch_size: 8
+  lr_scheduler_type: linear
+  warmup_ratio: 0.2
+  per_device_train_batch_size: 10
+  per_device_eval_batch_size: 2
 
 # Logging configuration (WandB init arguments)
 wandb:
   enabled: true
   project: LLCheM
-  group: test
+  group: 1B_smiles_gridsearch
   name: test_1b_fine_tune
